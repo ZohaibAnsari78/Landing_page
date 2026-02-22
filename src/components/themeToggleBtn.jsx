@@ -1,33 +1,38 @@
 import React, { useEffect } from 'react'
 import assets from '../assets/assets'
 
-const themeToggleBtn = ({theme , setTheme}) => {
+const ThemeToggleBtn = ({ theme, setTheme }) => {
 
-    useEffect(()=>{
-        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setTheme(theme  || (prefersDarkMode ? 'dark' : 'light'))
-    },[])
+  useEffect(() => {
+    const stored = localStorage.getItem('theme')
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (!theme) {
+      setTheme(stored || (prefersDarkMode ? 'dark' : 'light'))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-    useEffect(()=>{
-        if(theme === 'dark'){
-            document.documentElement.classList.add('dark')
-        }else{
-            document.documentElement.classList.remove('dark')
-        }
-        localStorage.setItem('theme', theme)
-    },[theme])
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else if (theme === 'light') {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+    }
+  }, [theme])
 
   return (
     <>
       <button>
         {theme === 'dark' ? (
-            <img onClick={()=> setTheme('light')} src={assets.sun_icon} className='size-8.5 p-1.5 border border-gray-500 rounded-all' alt="" />
+          <img onClick={() => setTheme('light')} src={assets.sun_icon} className='w-8 h-8 p-1.5 border border-gray-500 rounded-full' alt="Switch to light" />
         ) : (
-            <img onClick={()=> setTheme('light')} src={assets.moon_icon} className='size-8.5 p-1.5 border border-gray-500 rounded-all' alt="" />
+          <img onClick={() => setTheme('dark')} src={assets.moon_icon} className='w-8 h-8 p-1.5 border border-gray-500 rounded-full' alt="Switch to dark" />
         )}
       </button>
     </>
   )
 }
 
-export default themeToggleBtn
+export default ThemeToggleBtn
