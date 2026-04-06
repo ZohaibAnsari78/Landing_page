@@ -18,7 +18,6 @@ const ContactUs = () => {
     });
 
     const data = await response.json();
-
     if (data.success) {
       toast.success('Thank you for your Submission!')
       event.target.reset();
