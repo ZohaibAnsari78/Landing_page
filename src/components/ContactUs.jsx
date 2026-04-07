@@ -2,6 +2,7 @@ import React from 'react'
 import Title from './Title'
 import assets from '../assets/assets'
 import toast from 'react-hot-toast';
+import { motion } from 'motion/react';
 
 const ContactUs = () => {
 
@@ -32,14 +33,24 @@ const ContactUs = () => {
     };
 
     return (
-        <div className='flex flex-col items-center gap-7 px-4 sm:px-12 lg:px-24 xl:px-40 pt-30 text-gray-700 dark:text-white'>
+        <motion.div 
+        initial= "hidden"
+    whileInView="visible"
+    transition={{ staggerchildren: 0.2 }}
+    viewport={{once: true}}
+        className='flex flex-col items-center gap-7 px-4 sm:px-12 lg:px-24 xl:px-40 pt-30 text-gray-700 dark:text-white'>
             
             <Title 
                 title="Reach out to us" 
                 desc="From Strategy to execution, we craft digital solutions that move your business forward." 
             />
 
-            <form onSubmit={onSubmit} className='grid sm:grid-cols-2 gap-3 sm:gap-5 max-w-2xl w-full'>
+            <motion.form 
+            initial= {{opacity: 0, y: 20}}
+            whileInView={{opacity: 1, y: 0}}
+            transition={{duration: 0.5, delay: 0.4 }}
+            viewport={{once: true}}
+            onSubmit={onSubmit} className='grid sm:grid-cols-2 gap-3 sm:gap-5 max-w-2xl w-full'>
 
                 <div>
                     <p className='mb-2 text-sm font-medium'>Your name</p>
@@ -88,8 +99,8 @@ const ContactUs = () => {
                     <img src={assets.arrow_icon} alt="" className='w-4' />
                 </button>
 
-            </form>
-        </div>
+            </motion.form>
+        </motion.div>
     )
 }
 

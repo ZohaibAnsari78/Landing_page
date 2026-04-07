@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
+import { motion } from 'motion/react'
 
 const ServiceCard = ({service, index}) => {
 
     const [position, setPosition] = useState({x: 0, y: 0})
 
   return (
-    <div 
+    <motion.div 
+    initial= {{opacity: 0, y: 30}}
+    whileInView={{opacity: 1, y: 0}}
+    transition={{duration: 0.5, delay: index * 0.2 }}
+    viewport={{once: true}} 
       onMouseMove={(e)=>{
         const rect = e.currentTarget.getBoundingClientRect()
         setPosition({
@@ -34,7 +39,7 @@ const ServiceCard = ({service, index}) => {
 
         </div>
 
-    </div>
+    </motion.div>
   )
 }
 
