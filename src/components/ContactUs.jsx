@@ -33,7 +33,7 @@ const ContactUs = () => {
     };
 
     return (
-        <motion.div 
+        <motion.div id='contact-us'
         initial= "hidden"
     whileInView="visible"
     transition={{ staggerchildren: 0.2 }}
